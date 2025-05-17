@@ -1,0 +1,40 @@
+﻿@model AnagramInput
+@{
+    ViewData["Title"] = "Anagram Checker";
+    Layout = "~/Views/Shared/_Layout.cshtml"; 
+}
+
+<h2>Anagram Checker</h2>
+
+<form asp-action="Index" method="post">
+    <div>
+        <label>First Words (satu per baris):</label><br />
+        <textarea name="FirstWordsRaw" rows="6" cols="40">@Model?.FirstWordsRaw</textarea>
+    </div>
+
+    <div style="margin-top: 10px;">
+        <label>Second Words (satu per baris):</label><br />
+        <textarea name="SecondWordsRaw" rows="6" cols="40">@Model?.SecondWordsRaw</textarea>
+    </div>
+
+    <button type="submit" style="margin-top: 15px;">Check</button>
+</form>
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div style="color:red; margin-top: 10px;">
+        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+        {
+            <p>@error.ErrorMessage</p>
+        }
+    </div>
+}
+
+@if (ViewBag.Result != null)
+{
+    <div style="margin-top: 20px;">
+        <h4>Hasil:</h4>
+        <p>@ViewBag.Result</p> 
+    </div>
+}
+<a asp-controller="Discount" asp-action="Index" class="btn btn-secondary">Go to Discount Page</a>

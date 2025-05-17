@@ -1,0 +1,29 @@
+﻿@model DiscountRequest
+@{
+    ViewData["Title"] = "Discount Calculator";
+}
+<form asp-action="Index" method="post">
+    <div>
+        <label>Customer Type:</label>
+        <input type="text" name="CustomerType" />
+    </div>
+    <div>
+        <label>Point Reward:</label>
+        <input type="number" name="PointReward" />
+    </div>
+    <div>
+        <label>Total Belanja:</label>
+        <input type="number" name="TotalBelanja" step="0.01" />
+    </div>
+    <button type="submit">Hitung</button>
+</form>
+
+@if (ViewBag.Response != null)
+{
+    var res = (DiscountResponsecs)ViewBag.Response;
+    <div>
+        <p>Transaksi ID: @res.TransaksiId</p>
+        <p>Diskon: @res.Diskon</p>
+        <p>Total Bayar: @res.TotalBayar</p>
+    </div>
+}
